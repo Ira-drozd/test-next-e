@@ -6,6 +6,14 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+const bodyParser = require('body-parser');
+
+app.prepare().then(() => {
+  const server = express();
+  server.use(bodyParser.urlencoded({ extended: true }))
+  server.use(bodyParser.json())
+})
+
 app.prepare().then(() => {
   const server = express()
 
